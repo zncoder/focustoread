@@ -1,4 +1,4 @@
-function action() {
+function activate() {
 	let el = elementSelected()
 	if (el) {
 		restore(el)
@@ -6,29 +6,30 @@ function action() {
 	selectElement()
 }
 
-function elClass() {
-	return "focus_5cimvxq"
-}
-
 function elementSelected() {
-	return document.querySelector("."+elClass())
+	return document.querySelector(".focus_5cimvxq")
 }
 
 function restore(el) {
-	el.classList.remove(elClass())
+	el.classList.remove("focus_5cimvxq")
 }
 
 function selectElement() {
-	document.body.style.cursor = "grab"
+	document.body.classList.add("grab_5cimvxq")
 	document.addEventListener("click", onClick)
+	document.addEventListener("keyup", onKeyUp)
 	document.addEventListener("mouseover", onMouseOver)
 	document.addEventListener("mouseout", onMouseOut)
 }
 
-function stopSelectElement(el) {
-	highlightElement(el, false)
-	document.body.style.cursor = ""
+function deactivate() {
+	let el = document.querySelector(".highlight_5cimvxq")
+	if (el) {
+		highlightElement(el, false)
+	}
+	document.body.classList.remove("grab_5cimvxq")
 	document.removeEventListener("click", onClick)
+	document.removeEventListener("keyup", onKeyUp)
 	document.removeEventListener("mouseover", onMouseOver)
 	document.removeEventListener("mouseout", onMouseOut)
 }
@@ -41,52 +42,33 @@ function onMouseOut(ev) {
 	highlightElement(ev.target, false)
 }
 
-function setBgColor(c) {
-	// Note: cannot use var or let because page.js may be injected multiple times
-	document.body.setAttribute("bgcolor_5cimvxq", c)
-}
-
-function getBgColor() {
-	return document.body.getAttribute("bgcolor_5cimvxq")
-}
-
-function removeBgColor() {
-	document.body.removeAttribute("bgcolor_5cimvxq")
-}
-
 function highlightElement(el, set) {
 	if (set) {
-		setBgColor(el.style.backgroundColor)
-		el.style.backgroundColor = "#FDFF47"
+		el.classList.add("highlight_5cimvxq")
 	} else {
-		let c = getBgColor()
-		if (typeof c === "string") {
-			el.style.backgroundColor = c;
-			removeBgColor()
-		}
+		el.classList.remove("highlight_5cimvxq")
 	}
+}
+
+function onKeyUp(ev) {
+	deactivate()
 }
 
 function onClick(ev) {
 	// click: highlight element
 	// alt-click: remove element
-	// ctrl-click: stop
 	if (ev.button != 0) {
 		return
 	}
 
 	let el = ev.target
-	if (ev.ctrlKey) {
-		stopSelectElement(el)
-		return
-	}
 	if (ev.altKey) {
 		el.parentNode.removeChild(el)
 		return
 	}
 	
-	el.classList.add(elClass())
-	stopSelectElement(el)
+	el.classList.add("focus_5cimvxq")
+	deactivate()
 }
 
-action()
+activate()
