@@ -2,9 +2,8 @@ function action() {
 	let el = elementSelected()
 	if (el) {
 		restore(el)
-	} else {
-		selectElement()
 	}
+	selectElement()
 }
 
 function elClass() {
@@ -20,9 +19,18 @@ function restore(el) {
 }
 
 function selectElement() {
+	document.body.style.cursor = "grab"
 	document.addEventListener("click", onClick)
 	document.addEventListener("mouseover", onMouseOver)
 	document.addEventListener("mouseout", onMouseOut)
+}
+
+function stopSelectElement(el) {
+	highlightElement(el, false)
+	document.body.style.cursor = ""
+	document.removeEventListener("click", onClick)
+	document.removeEventListener("mouseover", onMouseOver)
+	document.removeEventListener("mouseout", onMouseOut)
 }
 
 function onMouseOver(ev) {
@@ -60,17 +68,25 @@ function highlightElement(el, set) {
 }
 
 function onClick(ev) {
+	// click: highlight element
+	// alt-click: remove element
+	// ctrl-click: stop
 	if (ev.button != 0) {
 		return
 	}
 
 	let el = ev.target
+	if (ev.ctrlKey) {
+		stopSelectElement(el)
+		return
+	}
+	if (ev.altKey) {
+		el.parentNode.removeChild(el)
+		return
+	}
+	
 	el.classList.add(elClass())
-
-	highlightElement(el, false)
-	document.removeEventListener("click", onClick)
-	document.removeEventListener("mouseover", onMouseOver)
-	document.removeEventListener("mouseout", onMouseOut)
+	stopSelectElement(el)
 }
 
 action()
