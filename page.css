@@ -10,3 +10,20 @@
 .grab_5cimvxq {
 		cursor: grab;
 }
+
+#banner_5cimvxq {
+		position: fixed;
+		z-index: 100;
+		left: 0;
+		right: 0;
+		top: 0;
+		color: black;
+		background-color: silver;
+		font-size: x-small;
+		font-family: sans-serif;
+}
+
+#p_5cimvxq {
+		text-align: center;
+		margin: 0px;
+}

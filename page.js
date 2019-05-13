@@ -15,6 +15,14 @@ function restore(el) {
 }
 
 function selectElement() {
+	let div = document.createElement("div")
+	div.id = "banner_5cimvxq"
+	let p = document.createElement("p")
+	p.id = "p_5cimvxq"
+	p.innerText = "Move mouse to select; Alt-click to remove; Click to focus; Press any key to cancel"
+	div.appendChild(p)
+	document.body.appendChild(div)
+
 	document.body.classList.add("grab_5cimvxq")
 	document.addEventListener("click", onClick)
 	document.addEventListener("keyup", onKeyUp)
@@ -27,7 +35,13 @@ function deactivate() {
 	if (el) {
 		highlightElement(el, false)
 	}
+
 	document.body.classList.remove("grab_5cimvxq")
+	let div = document.querySelector("#banner_5cimvxq")
+	if (div) {
+		div.parentNode.removeChild(div)
+	}
+	
 	document.removeEventListener("click", onClick)
 	document.removeEventListener("keyup", onKeyUp)
 	document.removeEventListener("mouseover", onMouseOver)
