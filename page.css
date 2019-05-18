@@ -1,6 +1,6 @@
-.focus_5cimvxq {
+.narrow_5cimvxq {
 		margin: 0 auto;
-		max-width: 40em;
+		max-width: 40em !important;
 }
 
 .highlight_5cimvxq {
@@ -18,12 +18,16 @@
 		right: 0;
 		top: 0;
 		color: black;
-		background-color: silver;
 		font-size: x-small;
 		font-family: sans-serif;
 }
 
 #p_5cimvxq {
 		text-align: center;
+}
+
+#span_5cimvxq {
 		margin: 0px;
+		padding: 0em 0.5em 0em 0.5em;
+		background-color: silver;
 }

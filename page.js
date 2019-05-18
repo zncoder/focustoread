@@ -7,11 +7,11 @@ function activate() {
 }
 
 function elementSelected() {
-	return document.querySelector(".focus_5cimvxq")
+	return document.querySelector(".narrow_5cimvxq")
 }
 
 function restore(el) {
-	el.classList.remove("focus_5cimvxq")
+	el.classList.remove("narrow_5cimvxq")
 }
 
 function selectElement() {
@@ -19,7 +19,10 @@ function selectElement() {
 	div.id = "banner_5cimvxq"
 	let p = document.createElement("p")
 	p.id = "p_5cimvxq"
-	p.innerText = "Move mouse to select; Alt-click to remove; Click to focus; Press any key to cancel"
+	let span = document.createElement("span")
+	span.id = "span_5cimvxq"
+	span.innerText = "Move mouse to select; Alt-click to remove; Click to narrow; Shift-click to widen; Press any key to cancel"
+	p.appendChild(span)
 	div.appendChild(p)
 	document.body.appendChild(div)
 
@@ -80,9 +83,26 @@ function onClick(ev) {
 		el.parentNode.removeChild(el)
 		return
 	}
-	
-	el.classList.add("focus_5cimvxq")
+
+	if (ev.shiftKey) {
+		widen(el)
+	} else {
+		narrow(el)
+	}
 	deactivate()
+}
+
+function narrow(el) {
+	restore(el)
+	el.classList.add("narrow_5cimvxq")
+}
+
+function widen(el) {
+	restore(el)
+	el.style.width = "100%"
+	el.style.maxWidth = "100%"
+	document.body.innerHTML = ""
+	document.body.appendChild(el)
 }
 
 activate()
