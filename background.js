@@ -1,7 +1,20 @@
 function activate() {
 	// TODO: keep only one copy of page.css injected
-	inject("page.css")
-		.then(() => inject("page.js"))
+	chrome.storage.sync.get("narrow_width", items => {
+		let w = "normal.css"
+		switch (items.narrow_width) {
+		case "wide":
+			w = "wide.css"
+			break
+		case "narrow":
+			w = "narrow.css"
+			break
+		}
+
+		inject(w)
+			.then(() => inject("page.css"))
+			.then(() => inject("page.js"))
+	})
 }
 
 function inject(file) {
