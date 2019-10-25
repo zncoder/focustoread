@@ -21,7 +21,7 @@ function selectElement() {
 	p.id = "p_5cimvxq"
 	let span = document.createElement("span")
 	span.id = "span_5cimvxq"
-	span.innerText = "Move mouse to select; Alt-click to remove; Click to narrow; Shift-click to widen; Press any key to cancel"
+	span.innerHTML = "<b>Click</b> to focus main area; Highlight area, then <b>Ctrl-click</b> to focus, <b>Alt-click</b> to remove, <b>Shift-click</b> to widen; Press any key to cancel"
 	p.appendChild(span)
 	div.appendChild(p)
 	document.body.appendChild(div)
@@ -72,8 +72,10 @@ function onKeyUp(ev) {
 }
 
 function onClick(ev) {
-	// click: highlight element
-	// alt-click: remove element
+	// click: highlight main element
+	// ctrl-click: highlight selected element
+	// shift-click: widen selected element
+	// alt-click: remove selected element
 	if (ev.button != 0) {
 		return
 	}
@@ -82,6 +84,13 @@ function onClick(ev) {
 	if (ev.altKey) {
 		el.parentNode.removeChild(el)
 		return
+	}
+	
+	if (!ev.ctrlKey) {
+		el = findMain()
+		if (!el) {
+			return
+		}
 	}
 
 	if (ev.shiftKey) {
@@ -103,6 +112,19 @@ function widen(el) {
 	el.style.maxWidth = "100%"
 	document.body.innerHTML = ""
 	document.body.appendChild(el)
+}
+
+function findMain() {
+	let el = document.elementFromPoint(window.innerWidth/2, window.innerHeight/2)
+	let threshold = document.body.scrollHeight * 60 / 100
+	while (el && el !== document.body) {
+		let h = el.scrollHeight
+		if (h >= threshold) {
+			return el
+		}
+		el = el.parentElement
+	}
+	return null
 }
 
 activate()
