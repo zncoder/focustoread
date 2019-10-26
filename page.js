@@ -117,9 +117,9 @@ function widen(el) {
 function findMain() {
 	let el = document.elementFromPoint(window.innerWidth/2, window.innerHeight/2)
 	let threshold = document.body.scrollHeight * 60 / 100
-	while (el && el !== document.body) {
+	while (el) {
 		let h = el.scrollHeight
-		if (h >= threshold) {
+		if (h >= threshold || el === document.body) {
 			return el
 		}
 		el = el.parentElement
