@@ -8,21 +8,23 @@
 
 #banner_5cimvxq {
 		position: fixed;
-		z-index: 100;
+		z-index: 2147483647;
 		left: 0;
 		right: 0;
 		top: 0;
 		color: black;
 		font-size: x-small;
 		font-family: sans-serif;
+		display: grid;
+		width: 15%;
+		grid-template-columns: max-content max-content;
+		background-color: lightblue;
 }
 
-#p_5cimvxq {
-		text-align: center;
+.action_5cimvxq {
+		font-weight: bold;
 }
 
-#span_5cimvxq {
-		margin: 0px;
-		padding: 0em 0.5em 0em 0.5em;
-		background-color: silver;
+.desc_5cimvxq {
+		margin-left: 1em;
 }

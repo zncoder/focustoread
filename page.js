@@ -14,16 +14,21 @@ function restore(el) {
 	el.classList.remove("narrow_5cimvxq")
 }
 
+let tip = `<div class="action_5cimvxq">Click</div>
+<div class="desc_5cimvxq">Focus main area</div>
+<div class="action_5cimvxq">Ctrl-Click</div>
+<div class="desc_5cimvxq">Focus highlighted area</div>
+<div class="action_5cimvxq">Alt-Click</div>
+<div class="desc_5cimvxq">Remove highlighted area</div>
+<div class="action_5cimvxq">Shift-Click</div>
+<div class="desc_5cimvxq">Widen highlighted area</div>
+<div class="action_5cimvxq">Any key</div>
+<div class="desc_5cimvxq">Cancel</div>`
+
 function selectElement() {
 	let div = document.createElement("div")
 	div.id = "banner_5cimvxq"
-	let p = document.createElement("p")
-	p.id = "p_5cimvxq"
-	let span = document.createElement("span")
-	span.id = "span_5cimvxq"
-	span.innerHTML = "<b>Click</b> to focus main area; Highlight area, then <b>Ctrl-click</b> to focus, <b>Alt-click</b> to remove, <b>Shift-click</b> to widen; Press any key to cancel"
-	p.appendChild(span)
-	div.appendChild(p)
+	div.innerHTML = tip
 	document.body.appendChild(div)
 
 	document.body.classList.add("grab_5cimvxq")
