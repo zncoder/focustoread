@@ -16,7 +16,7 @@
 		font-size: x-small;
 		font-family: sans-serif;
 		display: grid;
-		width: 15%;
+		width: 25%;
 		grid-template-columns: max-content max-content;
 		background-color: lightblue;
 }

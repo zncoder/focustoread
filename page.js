@@ -132,4 +132,17 @@ function findMain() {
 	return null
 }
 
-activate()
+function handleMessage(req, sender, sendResponse) {
+	switch (req.op) {
+	case "activate":
+		deactivate()
+		activate()
+		break
+	default:
+		console.log(`unknown req:${req}`)
+		break
+	}
+	sendResponse({})
+}
+
+chrome.runtime.onMessage.addListener(handleMessage)

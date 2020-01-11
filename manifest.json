@@ -1,8 +1,8 @@
 {
   "name": "Focus To Read",
-  "version": "1.6.2",
+  "version": "1.7.0",
   "manifest_version": 2,
-  "description": "Select an element to make it easy to read",
+  "description": "Make page easy to read",
   "icons": {
 		"48": "icons/48.png"
   },
